@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.LoadData">
+
+    <TextView
+        android:id="@+id/updatingDatabaseTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="296dp"
+        android:text="در حال بارگیری از سرور"
+        android:textAlignment="center"
+        android:textAppearance="@style/FontForEditText"
+        android:textColor="@color/black"
+        android:textDirection="locale"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/loadDataProgress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/updatingDatabaseTextView"
+        android:layout_centerHorizontal="true"
+        android:rotation="180"
+        android:layoutDirection="rtl"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/updatingDatabaseTextView"
+        app:layout_constraintVertical_bias="0.068" />
+
+    <TextView
+        android:id="@+id/loadDataText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/loadDataProgress"
+        android:layout_alignEnd="@id/loadDataProgress"
+        android:layout_marginEnd="20dp"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/mapbox_blue"
+        android:textDirection="ltr"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loadDataProgress" />
+</androidx.constraintlayout.widget.ConstraintLayout>

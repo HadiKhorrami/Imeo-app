@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="280dp"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.GeometryJebheKar">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Activity.Report"
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="84dp"
+            android:gravity="center"
+            android:text="مختصات محل دپوی باطله"
+            android:textAppearance="@style/FontForEditText"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/mapCard"
+            android:layout_width="270dp"
+            android:layout_height="400dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginTop="204dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.mapbox.mapboxsdk.maps.MapView
+                android:id="@+id/wasteMapView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mapCard">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnLocation"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="350dp"
+                    android:background="@drawable/showonmap_button"
+                    android:drawableEnd="@drawable/ic_baseline_my_location_24"
+                    android:padding="10px"
+                    android:textAppearance="@style/FontForButtonText"
+                    android:textColor="@color/white" />
+
+                <!--                <androidx.appcompat.widget.AppCompatButton-->
+                <!--                    android:id="@+id/btnAddOnePoint"-->
+                <!--                    android:layout_width="30dp"-->
+                <!--                    android:layout_height="30dp"-->
+                <!--                    android:layout_marginStart="10dp"-->
+                <!--                    android:layout_marginTop="260dp"-->
+                <!--                    android:background="@drawable/add_button"-->
+                <!--                    android:drawableEnd="@drawable/ic_baseline_add_location_alt_24"-->
+                <!--                    android:padding="10px"-->
+                <!--                    android:textAppearance="@style/FontForButtonText"-->
+                <!--                    android:textColor="@color/white" />-->
+
+                <!--                <androidx.appcompat.widget.AppCompatButton-->
+                <!--                    android:id="@+id/btnDrawPolygon"-->
+                <!--                    android:layout_width="30dp"-->
+                <!--                    android:layout_height="34dp"-->
+                <!--                    android:layout_marginStart="10dp"-->
+                <!--                    android:layout_marginTop="225dp"-->
+                <!--                    android:background="@drawable/add_button"-->
+                <!--                    android:drawableEnd="@drawable/ic_baseline_format_shapes_24"-->
+                <!--                    android:padding="10px"-->
+                <!--                    android:textAppearance="@style/FontForButtonText"-->
+                <!--                    android:textColor="@color/white" />-->
+
+                <!--                <androidx.appcompat.widget.AppCompatButton-->
+                <!--                    android:id="@+id/btnStopAddMarker"-->
+                <!--                    android:layout_width="30dp"-->
+                <!--                    android:layout_height="30dp"-->
+                <!--                    android:layout_marginStart="10dp"-->
+                <!--                    android:layout_marginTop="190dp"-->
+                <!--                    android:background="@drawable/all_projects_button"-->
+                <!--                    android:drawableEnd="@drawable/ic_baseline_stop_circle_24"-->
+                <!--                    android:padding="10px"-->
+                <!--                    android:textAppearance="@style/FontForButtonText"-->
+                <!--                    android:textColor="@color/white" />-->
+            </com.mapbox.mapboxsdk.maps.MapView>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="52dp"
+            android:background="@drawable/showonmap_button"
+            android:drawableRight="@drawable/ic_baseline_arrow_forward_24"
+            android:fontFamily="@font/iransans"
+            android:paddingRight="8dp"
+            android:text="بازگشت"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mapCard" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="64dp"
+            android:background="@drawable/add_button"
+            android:drawableRight="@drawable/ic_baseline_save_24"
+            android:fontFamily="@font/iransans"
+            android:paddingRight="8dp"
+            android:text="ذخیره"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/btnBack"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mapCard" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

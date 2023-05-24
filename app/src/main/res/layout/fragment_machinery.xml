@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="280dp"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.MineCondition">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-388dp"
+        tools:layout_editor_absoluteY="14dp">
+
+        <TextView
+            android:id="@+id/textView119"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="@font/iransans"
+            android:text="نام ماشین :"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView120"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="@font/iransans"
+            android:text="تجهیزات :"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spnNameMashin" />
+
+        <TextView
+            android:id="@+id/textView121"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="@font/iransans"
+            android:text="مدل ماشین :"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spnEquipment" />
+
+        <TextView
+            android:id="@+id/textView122"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="@font/iransans"
+            android:text="روز کاری :"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtModeleMashin" />
+
+        <TextView
+            android:id="@+id/textView123"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="@font/iransans"
+            android:text="مصرف سوخت (لیتر) :"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtRoozeKari" />
+
+        <Spinner
+            android:id="@+id/spnNameMashin"
+            android:layout_width="150dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/spinner_layout"
+            android:elevation="8dp"
+            android:layoutDirection="rtl"
+            android:padding="5dp"
+            android:spinnerMode="dropdown"
+            android:textDirection="rtl"
+            android:theme="@style/SpinnerTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/spnEquipment"
+            android:layout_width="150dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/spinner_layout"
+            android:elevation="8dp"
+            android:layoutDirection="rtl"
+            android:padding="5dp"
+            android:spinnerMode="dropdown"
+            android:textDirection="rtl"
+            android:theme="@style/SpinnerTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spnNameMashin" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnEdit"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="96dp"
+            android:background="@drawable/showonmap_button"
+            android:drawableRight="@drawable/ic_baseline_sync_24"
+            android:fontFamily="@font/iransans"
+            android:paddingRight="8dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtMasrafeSookht" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnAdd"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="96dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/add_button"
+            android:drawableRight="@drawable/ic_baseline_add_24"
+            android:fontFamily="@font/iransans"
+            android:paddingRight="8dp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtMasrafeSookht" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="48dp"
+            android:background="@drawable/showonmap_button"
+            android:drawableRight="@drawable/ic_baseline_arrow_forward_24"
+            android:fontFamily="@font/iransans"
+            android:paddingRight="8dp"
+            android:text="بازگشت"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nestedScrollView" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/add_button"
+            android:drawableRight="@drawable/ic_baseline_save_24"
+            android:fontFamily="@font/iransans"
+            android:paddingRight="8dp"
+            android:text="ذخیره"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nestedScrollView" />
+
+        <EditText
+            android:id="@+id/edtModeleMashin"
+            android:layout_width="151dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/edittext_layout"
+            android:elevation="10dp"
+            android:gravity="right"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:textAppearance="@style/FontForEditText"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/textView121"
+            app:layout_constraintTop_toBottomOf="@+id/spnEquipment" />
+
+        <EditText
+            android:id="@+id/edtMasrafeSookht"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edittext_layout"
+            android:elevation="10dp"
+            android:gravity="right"
+            android:inputType="number"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:textAppearance="@style/FontForEditText"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/textView123"
+            app:layout_constraintTop_toBottomOf="@+id/edtRoozeKari" />
+
+        <EditText
+            android:id="@+id/edtRoozeKari"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="28dp"
+            android:background="@drawable/edittext_layout"
+            android:elevation="10dp"
+            android:gravity="right"
+            android:inputType="number"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:textAppearance="@style/FontForEditText"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/textView122"
+            app:layout_constraintTop_toBottomOf="@+id/edtModeleMashin" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnEdit">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/machineryRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

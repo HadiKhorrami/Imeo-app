@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="280dp"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.ExtractiveMineralMaterial">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-388dp"
+        tools:layout_editor_absoluteY="14dp">
+
+        <TextView
+            android:id="@+id/textView67"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/iransans"
+            android:text="تعداد روز کاری در ماه :"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView68"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/iransans"
+            android:text="تعداد شیفت در روز :"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtWorkDayInMonth" />
+
+        <TextView
+            android:id="@+id/textView69"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/iransans"
+            android:text="ساعت کاری در شیفت :"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtShiftInDay" />
+
+        <TextView
+            android:id="@+id/textView70"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/iransans"
+            android:text="تعداد ساعت کاری در ماه :"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtWorkHourInShift" />
+
+        <TextView
+            android:id="@+id/textView71"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/iransans"
+            android:text="شیفت کاری در ماه :"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtWorkHourInMonth" />
+
+        <EditText
+            android:id="@+id/edtWorkDayInMonth"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/edittext_layout"
+            android:elevation="10dp"
+            android:gravity="right"
+            android:inputType="number"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:textAppearance="@style/FontForEditText"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/textView67"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edtShiftInDay"
+            android:layout_width="120dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/edittext_layout"
+            android:elevation="10dp"
+            android:gravity="right"
+            android:inputType="number"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:textAppearance="@style/FontForEditText"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/textView68"
+            app:layout_constraintTop_toBottomOf="@+id/edtWorkDayInMonth" />
+
+        <EditText
+            android:id="@+id/edtWorkHourInMonth"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/edittext_layout"
+            android:elevation="10dp"
+            android:enabled="false"
+            android:gravity="right"
+            android:inputType="number"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:textAppearance="@style/FontForEditText"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/textView70"
+            app:layout_constraintTop_toBottomOf="@+id/edtWorkHourInShift" />
+
+        <EditText
+            android:id="@+id/edtWorkShiftInMonth"
+            android:layout_width="110dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/edittext_layout"
+            android:elevation="10dp"
+            android:enabled="false"
+            android:gravity="right"
+            android:inputType="number"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:textAppearance="@style/FontForEditText"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/textView71"
+            app:layout_constraintTop_toBottomOf="@+id/edtWorkHourInMonth" />
+
+        <EditText
+            android:id="@+id/edtWorkHourInShift"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/edittext_layout"
+            android:elevation="10dp"
+            android:gravity="right"
+            android:inputType="number"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:textAppearance="@style/FontForEditText"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/textView69"
+            app:layout_constraintTop_toBottomOf="@+id/edtShiftInDay" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="150dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="#393939"
+            app:layout_constraintBottom_toTopOf="@+id/mmConstraintLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtWorkShiftInMonth" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mmConstraintLayout"
+            android:layout_width="269dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view">
+
+            <Spinner
+                android:id="@+id/spnMineralMaterial"
+                android:layout_width="150dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/spinner_layout"
+                android:elevation="8dp"
+                android:layoutDirection="rtl"
+                android:padding="5dp"
+                android:spinnerMode="dropdown"
+                android:textDirection="rtl"
+                android:theme="@style/SpinnerTheme"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/edtWasteAmount"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/edittext_layout"
+                android:elevation="10dp"
+                android:gravity="right"
+                android:inputType="number"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:textAppearance="@style/FontForEditText"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/textView73"
+                app:layout_constraintTop_toBottomOf="@+id/spnMineralMaterial" />
+
+            <EditText
+                android:id="@+id/edtActualExtraction"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/edittext_layout"
+                android:elevation="10dp"
+                android:gravity="right"
+                android:inputType="number"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:textAppearance="@style/FontForEditText"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/textView74"
+                app:layout_constraintTop_toBottomOf="@+id/edtWasteAmount" />
+
+            <EditText
+                android:id="@+id/edtSalesValue"
+                android:layout_width="150dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/edittext_layout"
+                android:elevation="10dp"
+                android:gravity="right"
+                android:inputType="number"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:textAppearance="@style/FontForEditText"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView76" />
+
+            <EditText
+                android:id="@+id/edtWaybillSerial"
+                android:layout_width="200dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/edittext_layout"
+                android:elevation="10dp"
+                android:gravity="right"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:textAppearance="@style/FontForEditText"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView78" />
+
+            <EditText
+                android:id="@+id/edtOtherDetails"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/edittext_layout"
+                android:elevation="10dp"
+                android:gravity="top|start"
+                android:lines="3"
+                android:maxLines="10"
+                android:minLines="3"
+                android:padding="5dp"
+                android:scrollbars="vertical"
+                android:textAppearance="@style/FontForEditText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView79" />
+
+            <EditText
+                android:id="@+id/edtFixedPrice"
+                android:layout_width="150dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/edittext_layout"
+                android:elevation="10dp"
+                android:gravity="right"
+                android:inputType="number"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:textAppearance="@style/FontForEditText"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView77" />
+
+            <EditText
+                android:id="@+id/edtMineralTransport"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/edittext_layout"
+                android:elevation="10dp"
+                android:gravity="right"
+                android:inputType="number"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:textAppearance="@style/FontForEditText"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/textView75"
+                app:layout_constraintTop_toBottomOf="@+id/edtActualExtraction" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnAdd"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/all_projects_button"
+                android:drawableRight="@drawable/ic_baseline_add_24"
+                android:fontFamily="@font/iransans"
+                android:paddingRight="8dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtOtherDetails" />
+
+            <TextView
+                android:id="@+id/textView72"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/iransans"
+                android:text="ماده معدنی :"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView73"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/iransans"
+                android:text="مقدار باطله برداری (تن) :"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spnMineralMaterial" />
+
+            <TextView
+                android:id="@+id/textView74"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/iransans"
+                android:text="مقدار استخراج واقعی :"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtWasteAmount" />
+
+            <TextView
+                android:id="@+id/textView75"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="12dp"
+                android:fontFamily="@font/iransans"
+                android:text="مقدار حمل ماده معدنی :"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtActualExtraction" />
+
+            <TextView
+                android:id="@+id/textView76"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="12dp"
+                android:fontFamily="@font/iransans"
+                android:text="ارزش فروش ماده معدنی (ریال) :"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtMineralTransport" />
+
+            <TextView
+                android:id="@+id/textView77"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/iransans"
+                android:text="قیمت تمام شده ماده معدنی (ریال) :"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtSalesValue" />
+
+            <TextView
+                android:id="@+id/textView78"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/iransans"
+                android:text="سریال بارنامه حمل :"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtFixedPrice" />
+
+            <TextView
+                android:id="@+id/textView79"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="12dp"
+                android:fontFamily="@font/iransans"
+                android:text="سایر توضیحات :"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtWaybillSerial" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/showonmap_button"
+            android:drawableRight="@drawable/ic_baseline_arrow_forward_24"
+            android:fontFamily="@font/iransans"
+            android:paddingRight="8dp"
+            android:text="بازگشت"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mmConstraintLayout" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/add_button"
+            android:drawableRight="@drawable/ic_baseline_save_24"
+            android:fontFamily="@font/iransans"
+            android:paddingRight="8dp"
+            android:text="ذخیره"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mmConstraintLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</FrameLayout>

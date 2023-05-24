@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="280dp"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.ExtractiveMineralMaterial">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-388dp"
+        tools:layout_editor_absoluteY="14dp">
+
+
+        <TextView
+            android:id="@+id/textView84"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/iransans"
+            android:text="تعداد کارگاه استخراج  :"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView85"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/iransans"
+            android:text="تعداد تونل های در حال پیشروی (متر مکعب)  :"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtExtractionWorkShopQty" />
+
+        <TextView
+            android:id="@+id/textView86"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/iransans"
+            android:text="مجموع متراژ پیشروی تونل ها (متر)  :"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtAdvancingTunnelQty" />
+
+        <TextView
+            android:id="@+id/textView87"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/iransans"
+            android:text="مجموع حجم حفر تونل ها (متر مکعب)  :"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtTotalLengthTunnels" />
+
+        <TextView
+            android:id="@+id/textView88"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/iransans"
+            android:text="تعداد دویل های در حال پیشروی (متر مکعب)  :"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtTotalVolumeTunnels" />
+
+        <TextView
+            android:id="@+id/textView89"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/iransans"
+            android:text="مجموع متراژ پیشروی دویل ها (متر)  :"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtAdvancingDoilesQty" />
+
+        <TextView
+            android:id="@+id/textView90"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/iransans"
+            android:text="مجموع حجم حفر دویل ها (متر مکعب)  :"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtTotallengthDoils" />
+
+        <TextView
+            android:id="@+id/textView91"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/iransans"
+            android:text="حجم استخراج شده  :"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtTotalDrillingDoils" />
+
+        <EditText
+            android:id="@+id/edtExtractionWorkShopQty"
+            android:layout_width="120dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/edittext_layout"
+            android:elevation="10dp"
+            android:gravity="right"
+            android:inputType="number"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:textAppearance="@style/FontForEditText"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/textView84"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edtAdvancingTunnelQty"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edittext_layout"
+            android:elevation="10dp"
+            android:gravity="right"
+            android:inputType="number"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:textAppearance="@style/FontForEditText"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView85" />
+
+        <EditText
+            android:id="@+id/edtTotalLengthTunnels"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edittext_layout"
+            android:elevation="10dp"
+            android:gravity="right"
+            android:inputType="number"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:textAppearance="@style/FontForEditText"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/textView86"
+            app:layout_constraintTop_toBottomOf="@+id/edtAdvancingTunnelQty" />
+
+        <EditText
+            android:id="@+id/edtTotalVolumeTunnels"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edittext_layout"
+            android:elevation="10dp"
+            android:gravity="right"
+            android:inputType="number"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:textAppearance="@style/FontForEditText"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/textView87"
+            app:layout_constraintTop_toBottomOf="@+id/edtTotalLengthTunnels" />
+
+        <EditText
+            android:id="@+id/edtAdvancingDoilesQty"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edittext_layout"
+            android:elevation="10dp"
+            android:gravity="right"
+            android:inputType="number"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:textAppearance="@style/FontForEditText"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView88" />
+
+        <EditText
+            android:id="@+id/edtTotallengthDoils"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edittext_layout"
+            android:elevation="10dp"
+            android:gravity="right"
+            android:inputType="number"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:textAppearance="@style/FontForEditText"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/textView89"
+            app:layout_constraintTop_toBottomOf="@+id/edtAdvancingDoilesQty" />
+
+        <EditText
+            android:id="@+id/edtTotalDrillingDoils"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edittext_layout"
+            android:elevation="10dp"
+            android:gravity="right"
+            android:inputType="number"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:textAppearance="@style/FontForEditText"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/textView90"
+            app:layout_constraintTop_toBottomOf="@+id/edtTotallengthDoils" />
+
+        <EditText
+            android:id="@+id/edtExtractedVolume"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edittext_layout"
+            android:elevation="10dp"
+            android:gravity="right"
+            android:inputType="number"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:textAppearance="@style/FontForEditText"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/textView91"
+            app:layout_constraintTop_toBottomOf="@+id/edtTotalDrillingDoils" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="136dp"
+            android:layout_marginEnd="48dp"
+            android:background="@drawable/showonmap_button"
+            android:drawableRight="@drawable/ic_baseline_arrow_forward_24"
+            android:fontFamily="@font/iransans"
+            android:paddingRight="8dp"
+            android:text="بازگشت"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtExtractedVolume" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="136dp"
+            android:background="@drawable/add_button"
+            android:drawableRight="@drawable/ic_baseline_save_24"
+            android:fontFamily="@font/iransans"
+            android:paddingRight="8dp"
+            android:text="ذخیره"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtExtractedVolume" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

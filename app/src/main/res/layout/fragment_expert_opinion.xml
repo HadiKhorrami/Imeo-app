@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="280dp"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.Problems">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Fragment.Problems">
+
+
+        <RadioGroup
+            android:id="@+id/radioGroup1"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="76dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.466"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rdIsTajhizatNO"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:layoutDirection="rtl"
+                    android:text="رد"
+                    android:textAppearance="@style/FontForEditText"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rdIsTajhizatYES"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layoutDirection="rtl"
+                    android:text="تایید"
+                    android:textAppearance="@style/FontForEditText"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/edtOpinion"
+            android:layout_width="200dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="160dp"
+            android:background="@drawable/edittext_layout"
+            android:elevation="10dp"
+            android:gravity="top|start"
+            android:hint="نظر نهایی کارشناس"
+            android:lines="3"
+            android:maxLines="20"
+            android:minLines="3"
+            android:padding="5dp"
+            android:scrollbars="vertical"
+            android:textAppearance="@style/FontForEditText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSave12"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="64dp"
+            android:background="@drawable/add_button"
+            android:drawableRight="@drawable/ic_baseline_save_24"
+            android:fontFamily="@font/iransans"
+            android:paddingRight="8dp"
+            android:text="ذخیره"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtOpinion" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSave13"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/showonmap_button"
+            android:drawableRight="@drawable/ic_baseline_arrow_forward_24"
+            android:fontFamily="@font/iransans"
+            android:paddingRight="8dp"
+            android:text="بازگشت"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtOpinion" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

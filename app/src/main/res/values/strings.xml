@@ -1,0 +1,88 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <string name="url">*********</string>
+    <string name="app_name">Imeo</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="mapbox_access_token">pk.eyJ1IjoiaGFkaXJlYWw5IiwiYSI6ImNsMmZ0cXNjMjBiY3UzY2xqdzE1OHIxbXEifQ.wi3bA4H8DAxUbGGi0HwQJg</string>
+
+    <string name="Form1">1</string>
+    <string name="Form2">2</string>
+    <string name="Form3">3</string>
+    <string name="Form4">4</string>
+    <string name="Form5">5</string>
+
+    <string-array name="spnExecutionStatusArray">
+        <item>مبادله شده-1</item>
+        <item>مبادله نشده-2</item>
+        <item>در حال اصلاح-3</item>
+    </string-array>
+    <string-array name="spnNameMashin">
+        <item>بولدوزر-1</item>
+        <item>بیل مکانیکی-2</item>
+        <item>لودر-3</item>
+        <item>کامیون-4</item>
+        <item>تراکتور-5</item>
+        <item>دام تراک-6</item>
+        <item>دریل واگن-7</item>
+        <item>راسل-8</item>
+        <item>کمپرسور-9</item>
+        <item>وانت-10</item>
+        <item>سواری-11</item>
+    </string-array>
+    <string-array name="spnEquipment">
+        <item>ژنراتور-1</item>
+        <item>سیم برش-2</item>
+        <item>پیکور دستی-3</item>
+        <item>کابل-4</item>
+    </string-array>
+
+
+    <string-array name="spnProvinces">
+        <item>آذربایجان شرقی-38.4281-45.9071</item>
+        <item>آذربایجان غربی-37.7595-45.0000</item>
+        <item>اردبیل-38.2432-48.2976</item>
+        <item>اصفهان-32.6539-51.6660</item>
+        <item>البرز-35.8899-50.8456</item>
+        <item>ایلام-33.6350-46.4153</item>
+        <item>بوشهر-28.9145-50.8279</item>
+        <item>تهران-35.7219-51.3347</item>
+        <item>چهارمحال و بختیاری-32.1461-50.5136</item>
+        <item>خراسان جنوبی-32.5176-59.1042</item>
+        <item>خراسان رضوی-32.5176-59.1042</item>
+        <item>خراسان شمالی-37.3744-57.2819</item>
+        <item>خوزستان-31.4360-49.0413</item>
+        <item>زنجان-36.6830-48.5087</item>
+        <item>سمنان-35.5767-53.3949</item>
+        <item>سیستان و بلوچستان-27.5300-60.5821</item>
+        <item>فارس-29.5926-52.5836</item>
+        <item>قزوین-36.2795-50.0046</item>
+        <item>قم-34.6416-50.8746</item>
+        <item>کردستان-35.3824-47.1362</item>
+        <item>کرمان-29.4850-57.6439</item>
+        <item>کرمانشاه-34.4576-46.6705</item>
+        <item>کهگیلویه و بویراحمد-30.7246-50.8456</item>
+        <item>گلستان-37.2898-55.1376</item>
+        <item>گیلان-37.1172-49.5280</item>
+        <item>لرستان-33.5818-48.3988</item>
+        <item>مازندران-36.3994-52.1912</item>
+        <item>مرکزی-34.6962-49.6911</item>
+        <item>هرمزگان-27.4150-56.7412</item>
+        <item>همدان-34.9737-48.5587</item>
+        <item>یزد-32.1006-54.4342</item>
+
+    </string-array>
+
+</resources>

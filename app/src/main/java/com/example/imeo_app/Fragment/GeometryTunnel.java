@@ -1,0 +1,431 @@
+package com.example.imeo_app.Fragment;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
+
+import android.Manifest;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Build;
+import android.os.Bundle;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import android.os.Handler;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.TypefaceSpan;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.example.imeo_app.R;
+import com.example.imeo_app.db.service.ReportLocalServiceUtil;
+import com.example.imeo_app.db.tables.Report;
+import com.example.imeo_app.db.util.JsonInsertUtil;
+import com.google.maps.android.PolyUtil;
+import com.mapbox.geojson.Point;
+import com.mapbox.geojson.Polygon;
+import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.location.LocationComponent;
+import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions;
+import com.mapbox.mapboxsdk.location.LocationComponentOptions;
+import com.mapbox.mapboxsdk.location.modes.CameraMode;
+import com.mapbox.mapboxsdk.location.modes.RenderMode;
+import com.mapbox.mapboxsdk.maps.MapView;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.plugins.localization.LocalizationPlugin;
+import com.mapbox.mapboxsdk.plugins.localization.MapLocale;
+import com.mapbox.mapboxsdk.style.layers.FillLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import com.mapbox.turf.TurfJoins;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.LinearRing;
+import org.locationtech.jts.io.WKTReader;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class GeometryTunnel extends Fragment {
+
+    MapView mapView;
+    long currRepId,mineId;
+    private LocationComponent locationComponent;
+    AppCompatButton btnLocation,btnSave,btnBack;
+    JSONObject mineInfoJsonObject;
+    WKTReader reader;
+    Boolean isInside;
+    String reportId,mineWkt,wktCenter;
+    String[] newPoints;
+    String[] centerNewPoints;
+    String[] tunnelWasteNewPoints;
+    Polygon poly;
+    Double lat,lng;
+    private static final List<List<Point>> POINTS = new ArrayList<>();
+    private static final List<Point> OUTER_POINTS = new ArrayList<>();
+    private static final List<List<Point>> tunnelPOINTS = new ArrayList<>();
+    private static final List<Point> tunnel_OUTER_POINTS = new ArrayList<>();
+    private static final List<com.google.android.gms.maps.model.LatLng> tunnel_LatLng_List = new ArrayList<>();
+    ConstraintLayout mainLayout;
+    public GeometryTunnel() {
+    }
+
+    public static GeometryTunnel newInstance() {
+        GeometryTunnel fragment = new GeometryTunnel();
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        Mapbox.getInstance(getActivity(), getString(R.string.mapbox_access_token));
+        ActivityResultLauncher<String[]> locationPermissionRequest =
+                registerForActivityResult(new ActivityResultContracts
+                                .RequestMultiplePermissions(), result -> {
+                            Boolean fineLocationGranted = result.getOrDefault(
+                                    Manifest.permission.ACCESS_FINE_LOCATION, false);
+                            Boolean coarseLocationGranted = result.getOrDefault(
+                                    Manifest.permission.ACCESS_COARSE_LOCATION, false);
+                            if (fineLocationGranted != null && fineLocationGranted) {
+                                // Precise location access granted.
+                            } else if (coarseLocationGranted != null && coarseLocationGranted) {
+                                // Only approximate location access granted.
+                            } else {
+                                // No location access granted.
+                            }
+                        }
+                );
+        locationPermissionRequest.launch(new String[]{
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+        });
+        reader = new WKTReader();
+        String mineInfo = getArguments().getString("mineInfo");
+        try {
+            mineInfoJsonObject = new JSONObject(mineInfo);
+            mineWkt = mineInfoJsonObject.getString("wkt");
+            mineId = mineInfoJsonObject.getLong("mineId");
+            reportId = mineInfoJsonObject.getString("reportId");
+            wktCenter = mineInfoJsonObject.getString("wktCenter");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        SharedPreferences shared = getActivity().getSharedPreferences("repId", MODE_PRIVATE);
+        long repId = shared.getLong("reportId", 0);
+
+        int mineStage = getArguments().getInt("mineStage");
+        String extractionMethod = getArguments().getString("extractionMethod");
+
+        View view = inflater.inflate(R.layout.fragment_geometry_tunnel, container, false);
+        mapView = view.findViewById(R.id.tunnelMapView);
+        getTunnelGeo();
+        btnLocation = view.findViewById(R.id.btnLocation);
+        btnSave = view.findViewById(R.id.btnSave);
+        btnBack = view.findViewById(R.id.btnBack);
+        mainLayout = view.findViewById(R.id.mainLayout);
+        btnLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                zoomToMyLocation();
+            }
+        });
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.P)
+            @Override
+            public void onClick(View v) {
+                if(isInside == true) {
+                    JSONArray jsonArray = new JSONArray();
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject.put("reportId", repId);
+                        jsonObject.put("geometryTunnel", "POINT (" + lng + " " + lat + ")");
+                        jsonObject.put("setGeom1", true);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    jsonArray.put(jsonObject);
+                    JsonInsertUtil.insertReportsFromJSON(jsonArray, getActivity());
+                    Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/IRANSansWeb.ttf");
+                    SpannableString efr = new SpannableString("ثبت شد");
+                    efr.setSpan(new TypefaceSpan(font), 0, efr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    Toast.makeText(getActivity(), efr, Toast.LENGTH_SHORT).show();
+
+                    Fragment selectedFragment = ProductionSalesStatistics.newInstance();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_placeholder, selectedFragment).commit();
+                    Bundle bundle = new Bundle();
+                    selectedFragment.setArguments(bundle);
+                    Intent intent = new Intent("setColor");
+                    intent.putExtra("button", "btnForm6");
+                    LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
+                }else {
+                    Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/IRANSansWeb.ttf");
+                    SpannableString efr = new SpannableString("موقعیت مکانی در محدوده ی معدن نیست");
+                    efr.setSpan(new TypefaceSpan(font), 0, efr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    Toast.makeText(getActivity(), efr, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment selectedFragment = MineCondition.newInstance();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_placeholder, selectedFragment).commit();
+                Bundle bundle = new Bundle();
+                bundle.putLong("mineId", mineId);
+                bundle.putInt("mineStage", mineStage);
+                bundle.putString("mineInfo", mineInfo);
+                bundle.putString("extractionMethod", extractionMethod);
+                selectedFragment.setArguments(bundle);
+                Intent intent = new Intent("setColor");
+                intent.putExtra("button","btnForm4");
+                LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
+            }
+        });
+        return view;
+    }
+    public void zoomToMyLocation() {
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(@NonNull MapboxMap mapboxMap) {
+
+                mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+                    @SuppressWarnings({"MissingPermission"})
+                    @Override
+                    public void onStyleLoaded(@NonNull Style style) {
+                        LocalizationPlugin localizationPlugin = new LocalizationPlugin(mapView, mapboxMap , style);
+                        localizationPlugin.setMapLanguage(MapLocale.LOCAL_NAME);
+
+                        if(!mineWkt.equals("")) {
+                            ArrayList<String> points = new ArrayList();
+                            String sa, sa1, sa2, sa3, sa4;
+                            sa = mineWkt;
+                            sa1 = sa.replaceAll("POLYGON ", "").replaceAll("POINT ", "").replaceAll("MULTI", "");
+                            sa2 = sa1.replaceAll("[()]", "");
+                            sa3 = sa2.replaceAll(", ", "#");
+                            sa4 = sa3.replaceAll(" ", ",");
+                            String[] splitString = sa4.split("#");
+                            for (int i = 0; i < splitString.length; i++) {
+                                points.add(splitString[i]);
+                            }
+                            OUTER_POINTS.clear();
+                            POINTS.clear();
+                            for (int i = 0; i < points.size(); i++) {
+                                newPoints = points.get(i).split(",");
+                                OUTER_POINTS.add(Point.fromLngLat(Double.parseDouble(newPoints[0]), Double.parseDouble(newPoints[1])));
+                                POINTS.add(OUTER_POINTS);
+                                tunnel_LatLng_List.add(new com.google.android.gms.maps.model.LatLng(Double.parseDouble(newPoints[1]), Double.parseDouble(newPoints[0])));
+                            }
+                            poly = Polygon.fromLngLats(POINTS);
+
+                            final long sourceId, layerId;
+                            sourceId = mineId;
+                            layerId = mineId;
+                            if (style.getSource(String.valueOf(sourceId)) != null) {
+                                style.removeLayer(String.valueOf(layerId));
+                                style.removeSource(String.valueOf(sourceId));
+                            } else {
+                                style.removeLayer(String.valueOf(layerId));
+                                style.addSource(new GeoJsonSource(String.valueOf(sourceId), Polygon.fromLngLats(POINTS)));
+                                style.addLayerBelow(new FillLayer(String.valueOf(layerId), String.valueOf(sourceId)).withProperties(
+                                        fillColor(Color.parseColor("#D62F2F"))), "settlement-label"
+                                );
+                            }
+                        }
+                        if (mapboxMap != null && mapboxMap.getStyle() != null) {
+                            enableLocationComponent(mapboxMap.getStyle(), mapboxMap);
+
+                            final Handler handler = new Handler();
+                            handler.postDelayed(() -> {
+                                if (locationComponent != null && locationComponent.getLastKnownLocation() != null) {
+                                    mapboxMap.setCameraPosition(new CameraPosition.Builder().target(new LatLng(locationComponent.getLastKnownLocation().getLatitude(), locationComponent.getLastKnownLocation().getLongitude())).zoom(Math.max(15, mapboxMap.getCameraPosition().zoom)).build());
+                                    lat = locationComponent.getLastKnownLocation().getLatitude();
+                                    lng = locationComponent.getLastKnownLocation().getLongitude();
+                                    isInside = PolyUtil.containsLocation(new com.google.android.gms.maps.model.LatLng(lat,lng), tunnel_LatLng_List, false);
+                                }
+                            }, 2000);
+                        }
+                    }
+                });
+            }
+        });
+
+    }
+    @SuppressWarnings({"MissingPermission"})
+    private void enableLocationComponent(@NonNull Style loadedMapStyle, @NonNull MapboxMap mapboxMap) {
+        // Create and customize the LocationComponent's options
+        LocationComponentOptions customLocationComponentOptions = LocationComponentOptions.builder(getActivity())
+                .elevation(5)
+                .accuracyAlpha(.6f)
+                .accuracyColor(Color.RED)
+                .foregroundTintColor(Color.BLUE)
+                .build();
+
+        // Get an instance of the component
+        locationComponent = mapboxMap.getLocationComponent();
+
+        LocationComponentActivationOptions locationComponentActivationOptions =
+                LocationComponentActivationOptions.builder(getActivity(), loadedMapStyle)
+                        .locationComponentOptions(customLocationComponentOptions)
+                        .build();
+
+        // Activate with options
+        locationComponent.activateLocationComponent(locationComponentActivationOptions);
+
+        // Enable to make component visible
+        locationComponent.setLocationComponentEnabled(true);
+
+        // Set the component's camera mode
+        locationComponent.setCameraMode(CameraMode.TRACKING_GPS);
+
+        // Set the component's render mode
+        locationComponent.setRenderMode(RenderMode.GPS);
+    }
+
+    private void getTunnelGeo(){
+        SharedPreferences shared = getActivity().getSharedPreferences("repId", MODE_PRIVATE);
+        long repId = shared.getLong("reportId", 0);
+        int status = shared.getInt("status", 0);
+        if(status==1){
+            for (int i = 0; i < mainLayout.getChildCount(); i++) {
+            View child = mainLayout.getChildAt(i);
+            child.setEnabled(false);
+        }
+        }
+        currRepId = repId;
+        ReportLocalServiceUtil reportLocalServiceUtil = new ReportLocalServiceUtil(getActivity());
+        Report report = reportLocalServiceUtil.getReportById(repId);
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(@NonNull MapboxMap mapboxMap) {
+                mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+                    @Override
+                    public void onStyleLoaded(@NonNull Style style) {
+                        LocalizationPlugin localizationPlugin = new LocalizationPlugin(mapView, mapboxMap , style);
+                        localizationPlugin.setMapLanguage(MapLocale.LOCAL_NAME);
+
+                        if(wktCenter != null) {
+                            ArrayList<String> centerPoints = new ArrayList();
+                            String s, s1, s2, s3, s4;
+                            s = wktCenter;
+                            s1 = s.replaceAll("POLYGON ", "").replaceAll("POINT ", "");
+                            s2 = s1.replaceAll("[()]", "");
+                            s3 = s2.replaceAll(", ", "#");
+                            s4 = s3.replaceAll(" ", ",");
+                            String[] centerSplitString = s4.split("#");
+                            for (int i = 0; i < centerSplitString.length; i++) {
+                                centerPoints.add(centerSplitString[i]);
+                            }
+                            for (int i = 0; i < centerPoints.size(); i++) {
+                                centerNewPoints = centerPoints.get(i).split(",");
+                            }
+                        }
+                        /////////////////////////////////////////////////////////////////////
+                        if(!mineWkt.equals("")) {
+                            ArrayList<String> points = new ArrayList();
+                            String sa, sa1, sa2, sa3, sa4;
+                            sa = mineWkt;
+                            sa1 = sa.replaceAll("POLYGON ", "").replaceAll("POINT ", "").replaceAll("MULTI", "");
+                            sa2 = sa1.replaceAll("[()]", "");
+                            sa3 = sa2.replaceAll(", ", "#");
+                            sa4 = sa3.replaceAll(" ", ",");
+                            String[] splitString = sa4.split("#");
+                            for (int i = 0; i < splitString.length; i++) {
+                                points.add(splitString[i]);
+                            }
+                            OUTER_POINTS.clear();
+                            POINTS.clear();
+                            for (int i = 0; i < points.size(); i++) {
+                                newPoints = points.get(i).split(",");
+                                OUTER_POINTS.add(Point.fromLngLat(Double.parseDouble(newPoints[0]), Double.parseDouble(newPoints[1])));
+                                POINTS.add(OUTER_POINTS);
+                            }
+                            poly = Polygon.fromLngLats(POINTS);
+
+                            final long sourceId, layerId;
+                            sourceId = mineId;
+                            layerId = mineId;
+                            if (style.getSource(String.valueOf(sourceId)) != null) {
+                                style.removeLayer(String.valueOf(layerId));
+                                style.removeSource(String.valueOf(sourceId));
+                            } else {
+                                style.removeLayer(String.valueOf(layerId));
+                                style.addSource(new GeoJsonSource(String.valueOf(sourceId), Polygon.fromLngLats(POINTS)));
+                                style.addLayerBelow(new FillLayer(String.valueOf(layerId), String.valueOf(sourceId)).withProperties(
+                                        fillColor(Color.parseColor("#D62F2F"))), "settlement-label"
+                                );
+                            }
+                            CameraPosition position = new CameraPosition.Builder().target(new LatLng(Double.parseDouble(centerNewPoints[1]), Double.parseDouble(centerNewPoints[0]))).zoom(12).tilt(20).build();
+                            mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 2000);
+                        }
+                        /////////////////////////////////////////////////////////
+                        if(!report.getGeometrydahanetunnel().equals("")) {
+                            ArrayList<String> jebhPoints = new ArrayList();
+                            String s, s1, s2, s3, s4;
+                            s = report.getGeometrydahanetunnel();
+                            s1 = s.replaceAll("POLYGON ", "").replaceAll("POINT ", "").replaceAll("MULTI", "").replaceAll("SRID=4326;", "");
+                            s2 = s1.replaceAll("[()]", "");
+                            s3 = s2.replaceAll(", ", "#");
+                            s4 = s3.replaceAll(" ", ",");
+                            String[] jebheSplitString = s4.split("#");
+                            for (int i = 0; i < jebheSplitString.length; i++) {
+                                jebhPoints.add(jebheSplitString[i]);
+                            }
+                            tunnel_OUTER_POINTS.clear();
+                            tunnelPOINTS.clear();
+                            for (int i = 0; i < jebhPoints.size(); i++) {
+                                tunnelWasteNewPoints = jebhPoints.get(i).split(",");
+                                tunnel_OUTER_POINTS.add(Point.fromLngLat(Double.parseDouble(tunnelWasteNewPoints[0]), Double.parseDouble(tunnelWasteNewPoints[1])));
+                                tunnelPOINTS.add(tunnel_OUTER_POINTS);
+                            }
+
+                            final long tunnelSourceId, tunnelLayerId;
+                            tunnelSourceId = repId;
+                            tunnelLayerId = repId;
+                            if (style.getSource(String.valueOf(tunnelSourceId)) != null) {
+                                style.removeLayer(String.valueOf(tunnelLayerId));
+                                style.removeSource(String.valueOf(tunnelSourceId));
+                            } else {
+                                style.removeLayer(String.valueOf(tunnelLayerId));
+                                style.addSource(new GeoJsonSource(String.valueOf(tunnelSourceId), Polygon.fromLngLats(tunnelPOINTS)));
+                                style.addLayerBelow(new FillLayer(String.valueOf(tunnelLayerId), String.valueOf(tunnelSourceId)).withProperties(
+                                        fillColor(Color.parseColor("#F3E012"))), "settlement-label"
+                                );
+                            }
+                        }
+                    }
+                });
+            }
+        });
+
+
+    }
+
+}

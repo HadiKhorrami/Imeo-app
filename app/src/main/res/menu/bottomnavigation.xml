@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu  xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/itemdashboard" android:title="داشبورد" android:icon="@drawable/ic_baseline_dashboard_24_white" android:layout_gravity="end"
+        android:gravity="end">
+    </item>
+
+    <item android:id="@+id/itemreports" android:title="گزارشات" android:icon="@drawable/ic_baseline_list_24_white" android:layout_gravity="end"
+        android:gravity="end">
+    </item>
+
+    <item android:id="@+id/itemprofile" android:title="حساب کاربری" android:icon="@drawable/ic_baseline_person_24_white" android:layout_gravity="end"
+        android:gravity="end">
+    </item>
+
+
+</menu>
